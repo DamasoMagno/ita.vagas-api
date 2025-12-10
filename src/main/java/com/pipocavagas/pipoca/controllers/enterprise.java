@@ -49,7 +49,8 @@ public class enterprise {
 
     @DeleteMapping("/")
     public ResponseEntity<Void> delete (@RequestParam Long enterpriseId){
-        Enterprise enterpriseExists = enterpriseList.stream().filter(enterprise -> enterprise.getId().equals(enterpriseId));
+       Optional<Enterprise> enterpriseExists = enterpriseList.stream().filter(enterprise -> enterprise.getId().equals(enterpriseId)).findFirst();
+        enterpriseExists.ifPresent(enterpriseList::remove);
 
         return ResponseEntity.ok().build();
     }

@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:17
+    container_name: postgres_ita_vagas
+    environment:
+      POSTGRES_DB: ita_vagas
+      POSTGRES_USER: ita_vagas
+      POSTGRES_PASSWORD: ita_vagas
+    ports:
+      - "5432:5432"
