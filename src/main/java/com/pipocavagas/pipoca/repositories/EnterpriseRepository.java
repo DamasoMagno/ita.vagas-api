@@ -2,6 +2,8 @@ package com.pipocavagas.pipoca.repositories;
 
 import com.pipocavagas.pipoca.model.Enterprise;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public abstract class EnterpriseRepository implements JpaRepository<Enterprise, Long> {
+@Repository
+public interface EnterpriseRepository extends JpaRepository<Enterprise, Long> {
 }
