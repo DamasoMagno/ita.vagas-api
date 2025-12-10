@@ -35,28 +35,27 @@ public class EnterpriseController {
     public ResponseEntity<Void> update (
             @RequestParam Long enterpriseId,
             @RequestBody(required = false) Enterprise  updateEnterpriseDTO){
-        Enterprise enterpriseExists = enterpriseList.stream().filter(enterprise -> enterprise.getId().equals(enterpriseId)).findFirst().orElse(null);
+        Enterprise enterpriseExists = enterpriseRepository.findById(enterpriseId).orElse(null);
 
         if(enterpriseExists == null){
-            return ResponseEntity.notFound().build();
-        }
-
-        if(updateEnterpriseDTO.getEmail() != null) {
-            enterpriseExists.setEmail(updateEnterpriseDTO.getEmail());
+            throw new Error("Empresa não encontrada");
         }
 
         if(updateEnterpriseDTO.getName() != null){
             enterpriseExists.setName(updateEnterpriseDTO.getName());
         }
 
+        if(updateEnterpriseDTO.getEmail() != null){
+            enterpriseExists.setEmail(updateEnterpriseDTO.getEmail());
+        }
+
+        enterpriseRepository.save(enterpriseExists);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping
     public ResponseEntity<Void> delete (@RequestParam Long enterpriseId){
-       Optional<Enterprise> enterpriseExists = enterpriseList.stream().filter(enterprise -> enterprise.getId().equals(enterpriseId)).findFirst();
-        enterpriseExists.ifPresent(enterpriseList::remove);
-
+        enterpriseRepository.deleteById(enterpriseId);
         return ResponseEntity.ok().build();
     }
 }
