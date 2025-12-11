@@ -1,17 +1,18 @@
 package com.pipocavagas.pipoca.model;
 
 import jakarta.persistence.*;
-import lombok.*;
-
-import java.util.Set;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "enterprise")
+@Table(name = "user")
 @AllArgsConstructor
 @Entity
-public class Enterprise {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,9 +22,4 @@ public class Enterprise {
 
     @Column(name = "email")
     private String email;
-
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "enterprise")
-    private Set<Vacancy> vacancies;
 }
