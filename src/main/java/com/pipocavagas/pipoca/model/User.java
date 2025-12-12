@@ -1,5 +1,6 @@
 package com.pipocavagas.pipoca.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,4 +23,8 @@ public class User {
 
     @Column(name = "email")
     private String email;
+
+    @Column(name = "password")
+    @JsonIgnore
+    private String password;
 }
